@@ -1,6 +1,11 @@
 import random
 
 
+def statement_generator(decoration, decoration_time, statement):
+    """Makes a statement fancy by adding decorative characters"""
+
+    print(f"\n{decoration * decoration_time} {statement} {decoration * decoration_time}")
+
 
 def initial_points(which_user):
     """Roll the dice and return the total / if double points apply"""
@@ -81,4 +86,32 @@ while player_1_points < 13 and player_2_points <13:
 
     print(f"{first}: {player_1_points}  |   {second}: {player_2_points}")
 
-print("End of round.")
+# print("End of round.")
+
+# associate player points with either the user or the computer
+user_points = player_1_points
+comp_points = player_2_points
+
+
+# Switch the user and computer points if the computer goes first
+if first == "Computer":
+    user_points, comp_points = comp_points, user_points
+
+# Work out who won...
+if user_points > comp_points:
+    winner = "user"
+else:
+    winner = "computer"
+
+round_feedback = f"The {winner} won."
+
+# double the users points if needed
+if winner == "user" and double_user == "yes":
+    user_points += user_points
+
+# Output round results
+statement_generator("-", 5, "Results")
+print(f"User Points: {user_points}  |  Computer Points: {comp_points}")
+print(f"{round_feedback}\n")
+
+
